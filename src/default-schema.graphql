@@ -1,0 +1,56 @@
+# This is sample SDL schema for GraphQL Faker.
+#
+# There are two directives you can use to enhance fake data:
+#   - @fake
+#   - @examples
+# Each directive has autocompletion working so start by typing @
+#
+# Press save or Cmd+Enter to apply the changes and update server. Switch to GraphiQL
+# on the left panel to immediately test your changes.
+# This tool also supports extending existing APIs. Check graphql-faker --help
+
+
+type Query {
+  company(id: ID): Company
+  individual(id: ID): Individual
+  customer(customerID: ID): Customer
+}
+
+type Mutation {
+  validateCCS(customerID: ID, origin: ID): ValidateCCS
+}
+
+type ValidateCCS {
+  statusKyc: String @examples(values: ["ok"])
+  reasons: [String] @examples(values: ["null"])
+}
+
+interface Customer {
+  customerId: ID @examples(values: ["CUSTOMER:738A2ABD0F484A668BFA39F671A26C77"])
+  document: String @examples(values: ["49402987000160"])
+  registrationDate:String @fake(type: recentDate, options: {dateFormat: "YYYY-MM-DD hh:mm:ss" })
+}
+
+type Individual implements Customer {
+  customerId: ID @examples(values: ["CUSTOMER:738A2ABD0F484A668BFA39F671A26C78"])
+  document: String @examples(values: ["49402987000160"])
+ registrationDate:String @fake(type: recentDate, options: {dateFormat: "YYYY-MM-DD hh:mm:ss" })
+	name: String @fake(type: fullName)
+}
+
+type Company implements Customer {
+  customerId: ID @examples(values: ["CUSTOMER:738A2ABD0F484A668BFA39F671A26C77"])
+  document: String @examples(values: ["49402987000160"])
+  registrationDate:String @fake(type: recentDate, options: {dateFormat: "YYYY-MM-DD hh:mm:ss" })
+	corporateName: String @fake(type: fullName)
+  partners: [Partners]
+}
+
+type Partners {
+    name: String @fake(type: fullName)
+    document: String @examples(values: ["49402987000160"])
+    partnershipStartDate:String @fake(type: recentDate, options: {dateFormat: "YYYY-MM-DD hh:mm:ss" })
+    partnershipEndDate:String @fake(type: recentDate, options: {dateFormat: "YYYY-MM-DD hh:mm:ss" })
+}
+
+

@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "pretty": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es2017",
+      "esnext.asynciterable"
+    ]
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "src/editor",
+    "node_modules",
+    ".tmp",
+    "dist",
+    "lib"
+  ]
+}
